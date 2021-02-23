@@ -51,6 +51,7 @@ class Game():
         
     
     def _gravity(self):
+        return
         print(self.chunks)
 
     def update(self,dt):
