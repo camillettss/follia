@@ -46,12 +46,20 @@ class Game():
         self.generator.blocks = blocks
         self.offsets = offsets
 
+        # gravity variables
+        self.movey = 0
+        
+    
+    def _gravity(self):
+        print(self.chunks)
+
     def update(self,dt):
         self.motion_amount = dt * 5
         w=self.keys[key.W];a=self.keys[key.A];s=self.keys[key.S];d=self.keys[key.D]
 
         if self.keys[key.SPACE]:
             self.player.y += self.motion_amount
+            self._gravity()
         elif self.keys[key.LCTRL]:
             self.player.y -= self.motion_amount
         if self.keys[key.LSHIFT]:
@@ -105,6 +113,7 @@ class Game():
 
         if sqrt(dx*dx+dy*dy+dz*dz) > self.offsets.deletion_range:
             self.unload(*to_check)
+
 
     def unload(self,cx,cy,cz):
         data = []
