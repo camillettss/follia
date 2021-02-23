@@ -3,6 +3,7 @@ import pickle
 from math import cos, radians, sin, sqrt
 
 import pyglet
+from pyglet import window
 from pyglet.gl import *
 from pyglet.window import key
 
@@ -35,7 +36,8 @@ class Game():
 
         self.world = world
 
-        #self.fps_display = pyglet.clock.ClockDisplay()
+        self.fps_display = pyglet.window.FPSDisplay(window=self.window)
+
 
         self.inventory = False
         self.invent_pos = (0,0)
@@ -178,6 +180,7 @@ class Game():
             return self.chunks[chunk].get_block(*inner)
         
     def on_draw(self):
+        #self.window.clear()
         glLineWidth(2.0)
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         glEnable(GL_BLEND)
@@ -238,7 +241,7 @@ class Game():
         glVertex2f(cx,cy-10)
         glVertex2f(cx,cy+10)
         glEnd()
-        #self.fps_display.draw()
+        self.fps_display.draw()
 
     def as_ints(self,x,y,z):
         return int(round(x)),int(round(y)),int(round(z))
